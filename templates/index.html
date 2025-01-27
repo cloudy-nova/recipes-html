@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Recipe List</h2>
+<a href="/create" hx-get="/create" hx-target="main">Create New Recipe</a>
+<ul>
+    {% for recipe in recipes %}
+    <li>
+        <strong>{{ recipe.title }}</strong>: {{ recipe.description }}
+        <a href="/edit/{{ recipe.id }}" hx-get="/edit/{{ recipe.id }}" hx-target="main">Edit</a>
+        <form action="/delete/{{ recipe.id }}" method="post" hx-post="/delete/{{ recipe.id }}" hx-target="main">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
