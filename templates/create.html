@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Create Recipe</h2>
+<form action="/create" method="post" hx-post="/create" hx-target="main">
+    <label for="title">Title:</label>
+    <input type="text" name="title" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}
