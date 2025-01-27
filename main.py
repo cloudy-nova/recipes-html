@@ -23,7 +23,9 @@ async def create_recipe(request: Request, title: str = Form(...), description: s
     global next_id
     recipes.append({"id": next_id, "title": title, "description": description})
     next_id += 1
-    return templates.TemplateResponse("index.html", {"request": request, "recipes": recipes})
+    response = RedirectResponse(url="/", status_code=status.HTTP_303_SEE_OTHER)
+    response.headers["HX-Redirect"] = "/"
+    return response
 
 @app.get("/edit/{recipe_id}", response_class=HTMLResponse)
 async def edit_recipe_form(request: Request, recipe_id: int):
